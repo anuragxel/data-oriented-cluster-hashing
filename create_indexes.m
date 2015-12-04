@@ -26,15 +26,15 @@ hash_global_table = containers.Map(global_key_set, centroids);
 hash_table_cell = {};
 hash_func_cell = {};
 for k = 1:k_value
-    cluster_points = vecs(idx==k);
-    [local_func, local_key_set] = create_hash_keys(cluster_points, w, b);
+    i = idx==k;
+    [local_func, local_key_set] = create_hash_keys(vecs(i), w, b);
     hash_func_cell{k} = local_func;
-    hash_table_cell{k} = containers.Map(local_key_set, positions(idx==k));
+    hash_table_cell{k} = containers.Map(local_key_set, positions(i));
 end
 % using write to write the indexes in
 % a file along with the variables load
 % them later when you wish to search
-write(strcat('index_',filename,'.mat'),hash_global_table,...
+save(strcat('index_',filename,'.mat'),hash_global_table,...
       hash_global_func,hash_func_cell,hash_table_cell,k_value, w, b);
 % FUNCTION create_indexes END
 
