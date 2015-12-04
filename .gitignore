@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+# Project specific
+*.fvecs
+*.bvecs
+*.ivecs
+*.m~
+
+dataset/
+gist/
