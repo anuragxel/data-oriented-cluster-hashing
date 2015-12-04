@@ -42,9 +42,12 @@ write(strcat('index_',filename,'.mat'),hash_global_table,...
 % the same cluster and then performs a PCA on them,
 % making a function from the set of chosen vectors
 % while also finding the set of keys for the points.
+%
+% CHECK CORRECTNESS PLZ
 function[keySet, func] = create_hash_keys(valueSet, w, b)
 pca_vector_num = 2;
 coeff = pca(valueSet);
 func = coeff(:,1:pca_vector_num);
+% @TODO: CHECK THIS AND CONCATENATE THE VALUES GIVEN BY TWO VECTORS
 keySet = (func*value_set + b)/w;
 % FUNCTION create_hash_keys END
