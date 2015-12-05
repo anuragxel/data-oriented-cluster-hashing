@@ -1,3 +1,5 @@
+function [indexfile, kmeansfile] = create_indexes(filename, size_file, k_value, w, b)
+%
 % Anurag Ghosh, Romil Aggarwal
 %
 % Parameters to give to create_indexes are
@@ -8,16 +10,18 @@
 %
 % This has been written as a part of course project 
 % in Database Systems, Monsoon 2015, IIIT Hyderabad
-function [indexfile, kmeansfile] = create_indexes(filename, size_file, k_value, w, b)
+%
 points = fvecs_read(filename,[1, size_file]);
 positions = 1:1:size(points,2);
 [idx,centroids] = kmeanspp(points, k_value); % Can be replaced by a faster algorithm using KD-Trees.
-idx = transpose(idx);
-centroids = transpose(centroids);
-points = transpose(points);
+idx = idx';
+centroids = centroids';
+points = points';
 kmeansfile = strcat(filename,'_kmeans.mat');
 save(kmeansfile,'idx','centroids');
 [hash_global_func, global_key_set] = create_hash_keys(centroids, w, b);
+%hash_global_func -> a, global_key_set -> hash value
+% 
 % store actual centroids instead of positions in the file for the
 % global hash table
 % Create an array of cells to store the hash tables and the functions
