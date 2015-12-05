@@ -25,4 +25,4 @@ toc
 %     query_pts = [ query_pts; vecs(:,y) ];
 %     
 % end
-% list = search_indexes(query_pts, beta, k_max, radius, indexfile)
+% list = search_indexes(query_pts, beta, k_max, radius, indexfile, filename)
