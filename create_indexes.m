@@ -1,4 +1,3 @@
-%
 % Anurag Ghosh, Romil Aggarwal
 %
 % Parameters to give to create_indexes are

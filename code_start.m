@@ -2,6 +2,7 @@
 % Create the indexes for the database
 % If indexes are already constructed for the set,
 % You may not run this part of the code.
+addpath('libs');
 filename = 'dataset/synthetic_set_060.fvecs';
 filesize = 200000;
 dimension = 60;
