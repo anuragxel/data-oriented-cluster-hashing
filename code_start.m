@@ -3,14 +3,12 @@
 % If indexes are already constructed for the set,
 % You may not run this part of the code.
 filename = 'dataset/synthetic_set_060.fvecs';
-filesize = 2000;
+filesize = 200000;
 dimension = 60;
 k = 20;
 w = 8;
 b = 5;
 [indexfile, kmeansfile] = create_indexes(filename,filesize,k,w,b);
-
-
 % %% Second Part
 % %Search query points in the data set
 % k_max = 50;
