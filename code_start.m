@@ -1,4 +1,4 @@
-%% First Part
+% First Part
 % Create the indexes for the database
 % If indexes are already constructed for the set,
 % You may not run this part of the code.
