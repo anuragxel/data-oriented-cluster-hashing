@@ -34,7 +34,6 @@ for i = 1:100:1000000
     fvecs_write(output, x);
 end
 
-
 % This function creates the synthetic dataset from the GIST Set
 % of 500000 points, 960 dimensions.
 function make_synthetic_set2(input, output)

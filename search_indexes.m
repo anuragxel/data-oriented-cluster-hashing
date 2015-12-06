@@ -1,37 +1,33 @@
-function [results] = search_indexes(query_pts, beta, k_max, radius, indexfile, input)
+function [results] = search_indexes(query_pts, beta, k_max, radius, indexfile, kmeansfile, input)
 % Loads the necessary index file to memory
 load(indexfile);
 load(kmeansfile);
-
 % query_pts -> mXn where n is the dimension of each pt so m points
-results = 0;
+results = [];
 for i = 1:size(query_pts,1)
     query_pt = query_pts(i,:);
     if k_value <= k_max
         dist = pdist2(centroids,query_pt);
         dist = dist/sum(dist);
+        disp(dist);
         c = find(dist < beta);
         centers = centroids(c,:);
     else
-        new_value = (query_pt*hash_global_func + b)/w;
-        c = 1:size(global_key_set,1);
-        for j = 1:length(new_value)
-            c = find(global_key_set(c,j) == new_value(j)); %finding the bucket
-        end
+        new_value = hash_point(query_pt, w, b, hash_global_func);
+        c = find(global_key_set == new_value);
         centers = centroids(c,:);
     end
-    for center = c
-        new_value = (query_pt*hash_global_func + b)/w;
-        cc = 1:size(hash_key_cell{center},1);
-        for j = 1:length(new_value)
-            cc = find(hash_key_cell{center}(cc,j) == new_value(j)); %finding the bucket
-        end
+    for center = c'
+        new_value = hash_point(query_pt, w, b, cell2mat(hash_func_cell(center)));
+        cc = find(hash_key_cell{center} == new_value); %finding the bucket
         idx_pts = hash_pos_cell{center}(cc);
-        for kk = 1:size(idx_pts)
-            points(kk,:) = fvecs_read(input, idx_pts(kk));
+        points = [];
+        for kk = idx_pts
+            points = [ points; fvecs_read(input, [kk kk])' ];
         end
         qq = pdist2(points,query_pt);
         result = find(qq < radius);
-        results(end+1:end+length(result),:) = points(result,:);
+        results = [ results;  points(result,:) ];
+        %results(end+1:end+length(result),:) = points(result,:);
     end
 end

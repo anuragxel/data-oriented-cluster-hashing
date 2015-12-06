@@ -6,9 +6,8 @@ function [func, keySet] = create_hash_keys(valueSet, w, b)
 % while also finding the set of keys for the points.
 %
 pca_vector_num = 2;
-
 func = pcasecon(valueSet.',pca_vector_num);
-set_val = (valueSet*func + b)/w;
+set_val = floor((valueSet*func + b)/w) + 1;
 keySet = byte_concat(set_val(:,1),set_val(:,2));
 % FUNCTION create_hash_keys END
 
