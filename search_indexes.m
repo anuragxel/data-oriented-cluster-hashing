@@ -11,12 +11,12 @@ load(kmeansfile);
 % query_pts -> mXn where n is the dimension of each pt so m points
 list = {};
 for i = 1:size(query_pts,1)
+    disp(i);
     results = [];
     query_pt = query_pts(i,:);
     if k_value <= k_max
         dist = pdist2(centroids,query_pt);
         dist = dist/sum(dist);
-        disp(dist);
         c = find(dist < beta);
         centers = centroids(c,:);
     else
@@ -34,6 +34,7 @@ for i = 1:size(query_pts,1)
         end
         qq = pdist2(points,query_pt);
         result = find(qq < radius);
+%         results = [results; result];
         results = [ results;  points(result,:) ];
         %results(end+1:end+length(result),:) = points(result,:);
     end

@@ -10,7 +10,7 @@ function accuracy = evaluate_point(list, filename, filesize, querypoint)
 %
 r = size(list,1);
 [~,idx] = pdist2(list,querypoint,'euclidean','smallest',r);
-sub_full_set = zeros(filesize);
+
 vecs = fvecs_read(filename, filesize)';
 [~,idx_2] = pdist2(vecs, querypoint,'euclidean','smallest',r);
 avg = 0;
