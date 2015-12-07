@@ -1,10 +1,17 @@
-function [results] = search_indexes(query_pts, beta, k_max, radius, indexfile, kmeansfile, input)
+function [list] = search_indexes(query_pts, beta, k_max, radius, indexfile, kmeansfile, input)
+% Anurag Ghosh, Romil Aggarwal
+%
+% This has been written as a part of course project 
+% in Database Systems, Monsoon 2015, IIIT Hyderabad
+% 
+
 % Loads the necessary index file to memory
 load(indexfile);
 load(kmeansfile);
 % query_pts -> mXn where n is the dimension of each pt so m points
-results = [];
+list = {};
 for i = 1:size(query_pts,1)
+    results = [];
     query_pt = query_pts(i,:);
     if k_value <= k_max
         dist = pdist2(centroids,query_pt);
@@ -30,4 +37,5 @@ for i = 1:size(query_pts,1)
         results = [ results;  points(result,:) ];
         %results(end+1:end+length(result),:) = points(result,:);
     end
+    list{i} = results;
 end

@@ -20,6 +20,7 @@ points = points';
 kmeansfile = strcat(filename,'_kmeans.mat');
 save(kmeansfile,'idx','centroids');
 [hash_global_func, global_key_set] = create_hash_keys(centroids, w, b);
+%
 %hash_global_func -> a, global_key_set -> hash value
 % 
 % store actual centroids instead of positions in the file for the
@@ -29,6 +30,7 @@ save(kmeansfile,'idx','centroids');
 % The hash tables here will store the hash key and the corresponding
 % position in the file instead of the actual value 
 % (later use fvecs_read to retrieve what point you wish).
+%
 hash_key_cell = {};
 hash_func_cell = {};
 hash_pos_cell = {};
@@ -38,9 +40,11 @@ for k = 1:k_value
     hash_key_cell{k}  = local_key_set;
     hash_pos_cell{k}  = positions(idx==k);
 end
+%
 % using write to write the indexes in
 % a file along with the variables load
 % them later when you wish to search
+%
 indexfile = strcat(filename,'_indexes.mat');
 save(indexfile,'global_key_set','centroids','hash_global_func',...
     'hash_func_cell','hash_key_cell','hash_pos_cell','k_value', 'w', 'b');

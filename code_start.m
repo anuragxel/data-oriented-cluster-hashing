@@ -3,8 +3,10 @@
 % If indexes are already constructed for the set,
 % You may not run this part of the code.
 tic
+clear
+clc
 addpath('libs');
-filename = 'dataset/synthetic_set_060.fvecs';
+filename = './../dataset/synthetic_set_060.fvecs';
 filesize = 20000;
 dimension = 60;
 k = 40;
@@ -30,6 +32,7 @@ list = search_indexes(query_pts, beta, k_max, radius, indexfile, kmeansfile, fil
 toc
 avg = 0.0;
 for i = 1:size(query_pts,1)
-    avg = avg + evaluate_point(list, filename, filesize, query_pts(i,:));
+    avg = avg + evaluate_point(list{i}, filename, filesize, query_pts(i,:));
+    fprintf('the avg value for %d query_pt => %f\n',i,avg);
 end
 avg = avg/size(query_pts,1);

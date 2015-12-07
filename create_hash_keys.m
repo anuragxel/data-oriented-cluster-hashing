@@ -7,7 +7,7 @@ function [func, keySet] = create_hash_keys(valueSet, w, b)
 %
 pca_vector_num = 2;
 func = pcasecon(valueSet.',pca_vector_num);
-set_val = floor((valueSet*func + b)/w) + 1;
+set_val = floor(((valueSet*func + b)/w)) + 1;
 keySet = byte_concat(set_val(:,1),set_val(:,2));
 % FUNCTION create_hash_keys END
 
